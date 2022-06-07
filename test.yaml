@@ -6,7 +6,7 @@ metadata:
   labels:
     app.kubernetes.io/name: "ocp-adms-oce-web"
 spec:
-  ingressClassName: "cpx-appc-dlbcorp-ee1dhda-ic"
+  ingressClassName: "cpx"
   backend:
     serviceName: "ocp-adms-oce-web"
     servicePort: 8080
