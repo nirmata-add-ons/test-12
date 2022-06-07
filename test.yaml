@@ -1,0 +1,24 @@
+apiVersion: "networking.k8s.io/v1beta1"
+kind: "Ingress"
+metadata:
+  annotations: {}
+  name: "dolis-test"
+  labels:
+    app.kubernetes.io/name: "ocp-adms-oce-web"
+spec:
+  ingressClassName: "cpx-appc-dlbcorp-ee1dhda-ic"
+  backend:
+    serviceName: "ocp-adms-oce-web"
+    servicePort: 8080
+  rules:
+  - host: "oce-adms-base.appc-dlbcorp-ee1dhda.duke-energy.com"
+    http:
+      paths:
+      - path: "/"
+        backend:
+          serviceName: "ocp-adms-oce-web"
+          servicePort: 8080
+  tls:
+  - hosts: []
+status:
+  loadBalancer: {}
