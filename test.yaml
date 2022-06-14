@@ -1,18 +1,25 @@
-kind: "HorizontalPodAutoscaler"
+apiVersion: "networking.k8s.io/v1beta1"
+kind: "Ingress"
 metadata:
   annotations: {}
-  name: "ocp-adms-notif-stage-event-processor"
+  name: "ocp-adms-oce-web"
   labels:
-    app.kubernetes.io/name: "ocp-adms-notif-processors"
+    app.kubernetes.io/name: "ocp-adms-oce-web"
 spec:
-  maxReplicas: 6
-  minReplicas: 2
-  scaleTargetRef:
-    apiVersion: "apps/v1"
-    kind: "Deployment"
-    name: "ocp-adms-notif-stage-event-processor"
-  metrics:
-  - type: "Resource"
-    resource:
-      name: "cpu"
-      targetAverageUtilization: 70
+  ingressClassName: "cpx-appc-dlbcorp-ee1dhda-ic"
+  backend:
+    serviceName: "ocp-adms-oce-web"
+    servicePort: 8080
+  rules:
+  - host: "oce-adms-base.appc-dlbcorp-ee1dhda.duke-energy.com"
+    http:
+      paths:
+      - path: "/"
+        backend:
+          serviceName: "ocp-adms-oce-web"
+          servicePort: 8080
+  pathType: regress
+  tls:
+  - hosts: []
+status:
+  loadBalancer: {}
